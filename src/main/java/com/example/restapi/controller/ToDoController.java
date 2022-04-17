@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @RestController
+@RequestMapping("/doapi")
 public class ToDoController {
 
     @Autowired
@@ -48,11 +48,12 @@ public class ToDoController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-
-
-
-
-
-
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id)
+    {
+        ToDo deleteToDo = toDoService.Delete(id);
+        return (deleteToDo != null) ?
+                ResponseEntity.status(HttpStatus.NO_CONTENT).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 }

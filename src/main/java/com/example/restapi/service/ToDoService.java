@@ -33,16 +33,19 @@ public class ToDoService {
         return createToDo;
     }
 
-    public ToDo update(Long id, ToDoDto toDoDto)
-    {
+    public ToDo update(Long id, ToDoDto toDoDto) {
         ToDo updateTodoTarget = toDoRepository.findById(id).orElse(null);
         ToDo upadteTodo = toDoDto.toEntity();
         updateTodoTarget.patch(upadteTodo);
-
         ToDo toDo = toDoRepository.save(updateTodoTarget);
         return toDo;
+    }
 
-
+    public ToDo Delete(Long id)
+    {
+        ToDo toDo = toDoRepository.findById(id).orElse(null);
+        toDoRepository.delete(toDo);
+        return toDo;
     }
 
 
