@@ -26,6 +26,11 @@ public class ToDoService {
         return toDoRepository.findById(id);
     }
 
+    public List<ToDo> completeDoList() {
+        return toDoRepository.completeList();
+    }
+
+
     public ToDo create(ToDoDto toDoDto) {
         ToDo createToDo = toDoDto.toEntity();
         log.info(createToDo.toString());
@@ -41,13 +46,11 @@ public class ToDoService {
         return toDo;
     }
 
-    public ToDo Delete(Long id)
-    {
+    public ToDo Delete(Long id) {
         ToDo toDo = toDoRepository.findById(id).orElse(null);
         toDoRepository.delete(toDo);
         return toDo;
     }
-
 
 
 }

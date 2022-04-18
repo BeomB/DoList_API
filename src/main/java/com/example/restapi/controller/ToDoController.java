@@ -31,6 +31,12 @@ public class ToDoController {
         return toDoService.getToDo(id);
     }
 
+    @GetMapping("/completelist")
+    public List<ToDo> completeList()
+    {
+        return toDoService.completeDoList();
+    }
+
     @PostMapping("/create")
     public ResponseEntity<ToDo> createToDo(@RequestBody ToDoDto toDoDto)
     {
@@ -39,6 +45,7 @@ public class ToDoController {
         return (createToDo != null) ? ResponseEntity.status(HttpStatus.OK).body(createToDo) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ToDo> update(@PathVariable Long id, @RequestBody  ToDoDto toDoDto)
